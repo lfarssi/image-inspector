@@ -21,12 +21,11 @@
   - **Geolocation**: Converts EXIF GPS rational values (degrees, minutes, seconds) into standardized decimal Latitude and Longitude format.
   - **Device Information**: Identifies camera manufacturer and model (e.g. `Canon EOS 5D Mark III`).
   - **Timestamps**: Extracts photo creation/capture date and time (`YYYY-MM-DD HH:MM:SS`).
-  - **Auxiliary Info**: Captures format, image dimensions, color mode, software used, and ISO/exposure settings.
 
 - **LSB Steganography Detection (`-s`)**:
   - Scans Least Significant Bits across RGB pixel arrays.
   - Detects PGP Public/Private key blocks (`-----BEGIN PGP PUBLIC KEY BLOCK-----`, etc.).
-  - Reconstructs concealed ASCII/UTF-8 byte streams across row-major and per-channel bit orderings.
+
 
 - **Flexible Output Management (`-o`)**:
   - Displays formatted report to stdout.
@@ -196,7 +195,7 @@ During audits, you may be asked to act as a **Digital Forensics Expert** explain
 ### Q3: What challenges did you face while developing the Image Inspector tool, and how did you address them?
 > **Answer**: Key technical challenges included:
 > 1. **GPS Coordinate Parsing**: EXIF stores GPS coordinates as IFD Rational tuples of degrees, minutes, and seconds. I implemented a mathematical conversion function in `utils.py` to translate these tuples into standard signed decimal degrees while correctly evaluating North/South and East/West reference direction tags.
-> 2. **LSB Bitstream Extraction**: Reconstructing hidden ASCII/PGP payloads required accounting for bit-ordering differences (MSB first vs. LSB first) and multi-channel traversal. I utilized NumPy arrays to perform vectorized bitwise operations (`arr & 1`) across pixel channels for fast payload recovery.
+> 2. **LSB Bitstream Extraction**: Reconstructing hidden PGP keys required extracting the Least Significant Bit (`arr & 1`) from image pixels and repacking the bitstream into byte arrays using NumPy (`np.packbits`).
 > 3. **Non-Destructive Parsing**: Ensured the tool operates in strict read-only mode to maintain evidentiary integrity.
 
 ### Q4: How can this tool be used in real-life digital forensics or cybersecurity scenarios?
