@@ -1,0 +1,17 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment / temporary files
+.venv/
+venv/
+ENV/
+
+# Project temporary / dump files
+np
+
+# IDE & OS files
+.DS_Store
+.idea/
+.vscode/
