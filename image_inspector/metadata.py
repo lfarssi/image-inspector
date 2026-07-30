@@ -41,8 +41,10 @@ def extract_metadata(image_path: str) -> dict:
     return result
 
 def format_metadata_report(meta_dict: dict) -> str:
-    """Format metadata dictionary into report string."""
-    lines = [meta_dict[k] for k in ("lat_lon_str", "device", "date") if meta_dict.get(k)]
-    return "\n".join(lines) if lines else "No metadata found."
+    """Format metadata dictionary into report string, showing 'Not found' for missing fields."""
+    lat_lon = meta_dict.get("lat_lon_str") or "Lat/Lon: Not found"
+    device = meta_dict.get("device") or "Device: Not found"
+    date = meta_dict.get("date") or "Date: Not found"
+    return f"{lat_lon}\n{device}\n{date}"
 
 
