@@ -4,8 +4,6 @@ from PIL import Image
 PGP_MARKERS = [
     "-----BEGIN PGP PUBLIC KEY BLOCK-----",
     "-----BEGIN PGP PRIVATE KEY BLOCK-----",
-    "-----BEGIN PGP MESSAGE-----",
-    "-----BEGIN PGP ARMORED FILE-----"
 ]
 
 def _search_pgp(text: str) -> str | None:
